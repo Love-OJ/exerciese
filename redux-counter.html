@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="decrement">-</button>
+    <span id="count">0</span>
+    <button id="increse">+</button>
+    <script src="https://unpkg.com/redux@4.1.0/dist/redux.min.js"></script>
+
+    <script type="module">
+        // import { createStore } from 'redux';
+const inBtn=document.getElementById('increse')
+const lll=document.getElementById('count')
+function handle(state={count:0},action)
+{
+ if(action.type==='increse')
+ {
+    return {count:state.count+1}
+ }
+ if(action.type==='decrement')
+ {
+    return {count:state.count-1}
+ }
+ return state
+}
+const store=Redux.createStore(handle)
+store.subscribe(()=>
+{
+console.log('我变化了哦')
+lll.innerText=store.getState().count
+})
+inBtn.addEventListener('click',()=>
+{
+    //增加
+    store.dispatch(
+        {
+            type:'increse'
+        }
+    )
+})
+const onBtn=document.getElementById('decrement')
+
+onBtn.addEventListener('click',()=>
+{
+    //减少
+    store.dispatch(
+        {
+            type:'decrement'
+        }
+    )
+})
+    </script>
+</body>
+</html>
